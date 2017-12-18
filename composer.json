@@ -1,0 +1,14 @@
+{
+    "name": "romss/blog-romss",
+    "description": "Le blog de romss",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "twig/twig": "^2.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Romss\\": "src/"
+        }
+    }
+}
