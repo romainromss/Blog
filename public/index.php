@@ -1,5 +1,7 @@
 <?php
 
+use Romss\Routing\Router;
+
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -12,20 +14,5 @@ if (isset($_SERVER['REQUEST_URI'])) {
     }
 }
 
-$app = new \Romss\App();
-try {
-    try {
-        echo $app->routing($url);
-    } catch (Twig_Error_Loader $e) {
-    } catch (Twig_Error_Runtime $e) {
-    } catch (Twig_Error_Syntax $e) {
-    }
-} catch (InvalidArgumentException $e) {
-    header('HTTP/1.1 404 Not Found');
-    try {
-        echo $app->e404();
-    } catch (Twig_Error_Loader $e) {
-    } catch (Twig_Error_Runtime $e) {
-    } catch (Twig_Error_Syntax $e) {
-    }
-}
+$router = new Router();
+$router->handleRequest($_SERVER['REQUEST_URI']);
