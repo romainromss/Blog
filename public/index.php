@@ -1,18 +1,19 @@
 <?php
 
+
+use Romss\App;
 use Romss\Routing\Router;
 
+require __DIR__ .'/../vendor/autoload.php';
 
-require __DIR__ . '/../vendor/autoload.php';
+$app = new App();
 
-$url = '/';
-if (isset($_SERVER['REQUEST_URI'])) {
-    $url = parse_url($_SERVER['REQUEST_URI']);
-    $url = trim($url['path'], '/');
-    if (empty($url)) {
-        $url = '/';
-    }
+$router = new Router($app);
+try {
+    $result = $router->handleRequest($_SERVER['REQUEST_URI']);
+} catch (Twig_Error_Loader $e) {
+} catch (Twig_Error_Runtime $e) {
+} catch (Twig_Error_Syntax $e) {
 }
+echo $result;
 
-$router = new Router();
-$router->handleRequest($_SERVER['REQUEST_URI']);

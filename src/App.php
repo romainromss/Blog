@@ -17,21 +17,28 @@ class App
     {
         $loader = new Twig_Loader_Filesystem(__DIR__ . '/../Views');
         $this->twig = new Twig_Environment($loader, [
-            'cache'=> false,
+            'cache' => false,
         ]);
 
         $this->db = new Database('mysql:host=127.0.0.1;dbname=blog', 'root', '23031991');
     }
 
+    /**
+     * @return Twig_Environment
+     */
+    public function getTwig(): Twig_Environment
+    {
+        return $this->twig;
+    }
 
     /**
-     * @return string
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @return Database
      */
-    public function e404()
+    public function getDb(): Database
     {
-        return $this->twig->render('errors/404.html.twig');
+        return $this->db;
     }
+
+
+
 }

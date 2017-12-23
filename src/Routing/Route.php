@@ -11,16 +11,45 @@ class Route
 
     private $controller;
 
-    public function __construct(string $path, array $params, string $controller){
+    private $method;
 
+    public function __construct(string $method, string $path, string $controller, array $params) {
+        $this->method = $method;
+        $this->path = $path;
+        $this->controller = $controller;
+        $this->params = $params;
     }
 
-    public function getController(){
+    /**
+     * @return string
+     */
+    public function getPath(): string
+    {
+        return $this->path;
+    }
+
+    public function setPath(string $newPath)
+    {
+        $this->path = trim($newPath);
+        if ($this->path === '') {
+            $this->path = '/';
+        }
+    }
+
+    public function getParams(): array
+    {
+        return $this->params;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMethod(): string
+    {
+        return $this->method;
+    }
+
+    public function getController() {
         return $this->controller;
     }
-
-    public function getParams($path){
-
-    }
-
 }

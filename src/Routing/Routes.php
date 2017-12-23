@@ -2,20 +2,34 @@
 
 namespace Romss\Routing;
 
+use Romss\Controllers\ArticleController;
+use Romss\Controllers\ArticleDetailsController;
+use Romss\Controllers\HomeController;
+
+
 return [
     'home' => [
+        'method' => 'GET',
         'path' => '/',
-        'methods' => [
+        'controller' => HomeController::class
+    ],
+
+    'articles' => [
+        'path' => '/article',
+        'method' => 'GET',
+        'controller' => ArticleController::class
+    ],
+
+    'articles_details' => [
+        'path' => '/article/details/{id}',
+        'method' => [
             'GET',
             'POST'
         ],
-        'controller' => HomeController::class // -> App\Action\HomeAction
-    ],
-    'articles_details' => [
-        'path' => '/article/details/{id}',
         'params' => [
             'id' => '\S+'
         ],
         'controller' => ArticleDetailsController::class
     ],
 ];
+

@@ -1,8 +1,11 @@
 {
-    "name": "romss/blog-romss",
-    "description": "Le blog de romss",
-    "type": "project",
-    "license": "MIT",
+    "name": "romss/untitled",
+    "authors": [
+        {
+            "name": "romss",
+            "email": "romain.romss@gmail.com"
+        }
+    ],
     "require": {
         "twig/twig": "^2.4"
     },
