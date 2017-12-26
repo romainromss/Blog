@@ -6,7 +6,7 @@ use Romss\Entities\Post;
 
 class PostsTable extends Table
 {
-    public function all ()
+    public function all()
     {
         $reqPosts = $this->db->request('SELECT * FROM blog.posts');
         $posts = [];
@@ -16,5 +16,15 @@ class PostsTable extends Table
         }
 
         return $posts;
+    }
+
+
+    public function getPost($id)
+    {
+        $post = $this->db->prepare('SELECT * FROM blog.posts WHERE id = ?');
+        $post->execute([
+            'id' => $id
+        ]);
+        return $post;
     }
 }

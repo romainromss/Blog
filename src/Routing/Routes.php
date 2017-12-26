@@ -22,10 +22,7 @@ return [
 
     'articles_details' => [
         'path' => '/article/details/{id}',
-        'method' => [
-            'GET',
-            'POST'
-        ],
+        'method' => 'GET',
         'params' => [
             'id' => '\S+'
         ],
