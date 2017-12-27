@@ -23,6 +23,12 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif
 }
 
+hr{
+    border-style: dashed;
+    border-width: 2px;
+
+}
+
 a {
     color: #212529;
     -webkit-transition: all .2s;
@@ -380,7 +386,8 @@ form .form-group:first-child .floating-label-form-group {
 }
 
 footer {
-    padding: 50px 0 65px
+    padding: 50px 0 65px;
+    background-color: rgb(82,88,94);
 }
 
 footer .list-inline {
@@ -427,6 +434,7 @@ footer .copyright {
 
 #date{
     margin-bottom: 1px;
+    font-size: 15px;
 }
 
 .card-text{
@@ -437,4 +445,27 @@ footer .copyright {
     display: block;
     margin:auto;
     width: 250px;
+}
+
+#com{
+    margin-bottom: 10px;
+}
+
+.img{
+    vertical-align: text-top;
+}
+
+.addcom{
+    margin-top: 50px;
+}
+
+.btest{
+    margin: 5px 0px 5px 0px;
+}
+
+.img404{
+    display: block;
+    margin: auto;
+    max-height: 800px;
+    max-width: 800px;
 }
