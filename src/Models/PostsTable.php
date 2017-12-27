@@ -8,7 +8,7 @@ class PostsTable extends Table
 {
     public function all()
     {
-        $reqPosts = $this->db->request('SELECT * FROM blog.posts');
+        $reqPosts = $this->db->request('SELECT id, title, content, author, creation_date, img FROM blog.posts');
         $posts = [];
 
         foreach ($reqPosts as $post) {

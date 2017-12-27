@@ -18,6 +18,7 @@ class CommentsTable extends Table
         return $comments;
     }
 
+
     public function getComments($postId)
     {
         $comments = $this->db->prepare('SELECT * FROM blog.comments WHERE post_id = :postId ORDER BY comment_date DESC');
