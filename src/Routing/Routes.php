@@ -22,9 +22,12 @@ return [
 
     'articles_details' => [
         'path' => '/article/details/{id}',
-        'method' => 'GET',
+        'method' => [
+            'GET',
+            'POST'
+        ],
         'params' => [
-            'id' => '\S+'
+            'id' => '\d+'
         ],
         'controller' => ArticleDetailsController::class
     ],

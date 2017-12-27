@@ -56,10 +56,10 @@ class Router
     public function handleRequest(string $request)
     {
         foreach ($this->routes as $route) {
-            if ($request === $route->getPath()) {
+            if ($route->match($request)) {
                 $controllerName = $route->getController();
                 $controller = new $controllerName($this->app->getDb(), $this->app->getTwig());
-                return $controller($route->getParams());
+                return $controller($route->getMatches());
             }
         }
 
