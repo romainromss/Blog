@@ -70,12 +70,40 @@
 <!-- Main Content -->
 
 <div class="container">
-    <div class="col-xs">
-        {% for post in posts %}
-            {{ post.title }}
-        {% endfor %}
-    </div>
+    {% if (post) %}
+        <div class="container">
+                <div class="card" style="width: 100%;">
+                    <div class="card-block">
+                        <h2 class="card-title">{{ post.title }}</h2>
+                        <p id="date" class="card-text">Date de mis à jour {{ post.creation_date|date('d/m/Y') }}</p>
+                        <p class="card-text">{{ post.content }}</p>
+                        <p class="card-text"> Article publié par <strong>{{ post.author }}</strong></p>
+                    </div>
+                </div>
+        </div>
+    {% else %}
+        <div class="col-xs">
+            Aucun article trouvé
+        </div>
+    {% endif %}
+
+    <h2>Commentaires</h2>
+
+    <form action="/article/details/{id}" method="post">
+        <div>
+            <label for="author">Auteur</label><br />
+            <input type="text" id="author" name="author" />
+        </div>
+        <div>
+            <label for="comment">Commentaire</label><br />
+            <textarea id="comment" name="comment"></textarea>
+        </div>
+        <div>
+            <input class="btn btn-primary" type="submit" />
+        </div>
+    </form>
 </div>
+
 
 <hr>
 

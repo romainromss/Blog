@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
 <head>
 
@@ -70,14 +70,18 @@
 <!-- Main Content -->
 
 <div class="container">
-    <div class="col-xs">
-        {% for post in posts %}
-            <a href="/article/details/{{ post.id }}"><h2>{{ post.title }}</h2></a>
-            <p>Date d'ajout le {{ post.creation_date|date('d/m/Y') }}</p>
-            <p>{{ post.content }} <strong>Par {{ post.author }}</strong> </p>
-        {% endfor %}
-    </div>
+    {% for post in posts %}
+        <div class="card" style="width: 100%;">
+            <div class="card-block">
+                <h2 class="card-title">{{ post.title }}</h2>
+                <p id="date" class="card-text">Date de dernière modification {{ post.creation_date|date('d/m/Y') }}</p>
+                <p class="card-text">{{ post.content  | truncate(150, true) }}</p>
+                <a href="/article/details/{{ post.id }}" class="btn btn-primary">Lire l'article</a>
+             </div>
+        </div>
+    {% endfor %}
 </div>
+
 
 <hr>
 
