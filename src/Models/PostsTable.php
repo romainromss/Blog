@@ -21,9 +21,9 @@ class PostsTable extends Table
 
     public function getPost($id)
     {
-        $post = $this->db->prepare('SELECT * FROM blog.posts WHERE id = ?');
+        $post = $this->db->prepare('SELECT * FROM blog.posts WHERE id = :id');
         $post->execute([
-            'id' => $id
+            ':id' => $id
         ]);
         return $post;
     }

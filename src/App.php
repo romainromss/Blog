@@ -3,6 +3,7 @@
 namespace Romss;
 
 use Twig_Environment;
+use Twig_Extensions_Extension_Text;
 use Twig_Loader_Filesystem;
 
 class App
@@ -19,6 +20,7 @@ class App
         $this->twig = new Twig_Environment($loader, [
             'cache' => false,
         ]);
+        $this->twig->addExtension(new Twig_Extensions_Extension_Text());
 
         $this->db = new Database('mysql:host=127.0.0.1;dbname=blog', 'root', '23031991');
     }
@@ -38,7 +40,6 @@ class App
     {
         return $this->db;
     }
-
 
 
 }
