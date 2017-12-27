@@ -28,7 +28,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand" href="home">Romain B</a>
+        <a class="navbar-brand" href="/">Romain B</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
             <i class="fa fa-bars"></i>
@@ -39,10 +39,10 @@
                     <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="about.html">About</a>
+                    <a class="nav-link" href="about.html">A propos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/article">Sample Post</a>
+                    <a class="nav-link" href="/article">Blog</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/contact">Contact</a>
@@ -53,7 +53,7 @@
 </nav>
 
 <!-- Page Header -->
-<header class="masthead" style="background-image: url('img/home-bg.jpg')">
+<header class="masthead" style="background-image: url('img/crayon.jpg')">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
@@ -75,17 +75,12 @@
             <div class="card-block">
                 <h2 class="card-title">{{ post.title }}</h2>
                 <p id="date" class="card-text">Date de dernière modification {{ post.creation_date|date('d/m/Y') }}</p>
-                <p class="card-text">{{ post.content  | truncate(150, true) }}</p>
+                <p class="card-text">{{ post.content  | truncate(250, true) }}</p>
                 <a href="/article/details/{{ post.id }}" class="btn btn-primary">Lire l'article</a>
              </div>
         </div>
     {% endfor %}
 </div>
-
-
-<hr>
-
-
 
 <!-- Footer -->
 <footer>
