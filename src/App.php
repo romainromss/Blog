@@ -22,7 +22,7 @@ class App
         ]);
         $this->twig->addExtension(new Twig_Extensions_Extension_Text());
 
-        $this->db = new Database('mysql:host=127.0.0.1;dbname=blog', 'root', '23031991');
+        $this->db = new Database('mysql:host=127.0.0.1;dbname=blog', 'root', '230391');
     }
 
     /**

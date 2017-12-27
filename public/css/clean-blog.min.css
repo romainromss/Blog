@@ -432,3 +432,9 @@ footer .copyright {
 .card-text{
     margin-top: 8px;
 }
+
+#cv{
+    display: block;
+    margin:auto;
+    width: 250px;
+}

@@ -3,6 +3,7 @@
 namespace Romss\Controllers;
 
 
+use Romss\Models\CommentsTable;
 use Romss\Models\PostsTable;
 
 class ArticleDetailsController extends  Controller
@@ -14,11 +15,26 @@ class ArticleDetailsController extends  Controller
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    private function getArticle(int $id) {
+    private function getArticleWithComments(int $id)
+    {
         $posts = new PostsTable($this->db);
         $post = $posts->getPost($id)->fetch();
 
-        return  $this->render('Article/postdetails', ['post' => $post]);
+        $comment = new CommentsTable($this->db);
+        $comments = $comment->getComments($id);
+
+        return $this->render('Article/postdetails', ['post' => $post, 'comments' => $comments]);
+    }
+
+    private function postComments(int $id)
+    {
+        $addComment = new CommentsTable($this->db);
+
+        $author = $this->post('author');
+        $comment = $this->post('comment');
+
+        $addComment->addComment($id, $author, $comment);
+        $this->redirect('/article/details/'.$id);
     }
 
     /**
@@ -28,12 +44,14 @@ class ArticleDetailsController extends  Controller
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    function __invoke(array $params)
+    public function __invoke(array $params)
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'GET'){
-            return $this->getArticle($params['id'] ?? 0);
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            return $this->getArticleWithComments($params['id'] ?? 0);
+        } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            return $this->postComments($params['id'] ?? 0);
         }
-        return  'Not found';
+        return 'Not found';
     }
-
 }
+

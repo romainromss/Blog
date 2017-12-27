@@ -31,11 +31,11 @@ class CommentsTable extends Table
     public function addComment($postId, $author, $comment)
     {
         $comments = $this->db->prepare('INSERT INTO blog.comments(post_id, author, comment, comment_date) VALUES(:postId, :author, :comment, NOW())');
-        $affectedLines = $comments->execute([
+        $comments->execute([
             ':postId' => $postId,
             ':author' =>$author,
             ':comment'=> $comment]);
 
-        return $affectedLines;
+        return $this->db->lastInsertId();
     }
 }
