@@ -40,6 +40,4 @@ class App
     {
         return $this->db;
     }
-
-
 }
