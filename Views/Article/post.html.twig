@@ -71,7 +71,7 @@
         <div class="card" style="width: 100%;">
             <div class="card-block">
                 <h2 class="card-title text-center">{{ post.title }}</h2>
-                <p id="date" class="card-text text-centertext-justify">Date de dernière modification {{ post.creation_date|date('d/m/Y') }}</p>
+                <p id="date" class="card-text text-center text-justify">Date de dernière modification {{ post.creation_date|date('d/m/Y') }}</p>
                 <div class="container col-lg-8"><img class="card-img text-lg-left" src="{{ post.img }}"/></div>
                 <p class="card-text">{{ post.chapo}}</p>
                 <a href="/article/details/{{ post.id }}" class="btn btn-primary">Lire l'article</a>
