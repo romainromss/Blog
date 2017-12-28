@@ -8,14 +8,10 @@ class CommentsTable extends Table
 {
     public function all ()
     {
-        $reqComments = $this->db->request('SELECT * FROM blog.comments');
-        $comments = [];
-
-        foreach ($reqComments as $comment) {
-            $comments[] = new Comment($comment);
-        }
-
-        return $comments;
+        $comments = $this->db->prepare('SELECT id, title, content, author, creation_date FROM blog.posts');
+        $comments->execute();
+        $reqComments = $comments->fetchAll();
+        return $reqComments;
     }
 
 

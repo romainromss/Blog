@@ -2,22 +2,15 @@
 
 namespace Romss\Models;
 
-use Romss\Entities\Post;
-
 class PostsTable extends Table
 {
     public function all()
     {
-        $reqPosts = $this->db->request('SELECT id, title, content, author, creation_date, img FROM blog.posts');
-        $posts = [];
-
-        foreach ($reqPosts as $post) {
-            $posts[] = new Post($post);
-        }
-
-        return $posts;
+        $posts = $this->db->prepare('SELECT id, title, content, author, creation_date, img, chapo FROM blog.posts');
+        $posts->execute();
+        $reqPosts = $posts->fetchAll();
+        return $reqPosts;
     }
-
 
     public function getPost($id)
     {
