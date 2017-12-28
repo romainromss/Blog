@@ -39,7 +39,7 @@ class Controller
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    protected function render($file, $params = [])
+    protected function render($file, $params)
     {
         return $this->twig->render($file.'.html.twig', $params);
     }

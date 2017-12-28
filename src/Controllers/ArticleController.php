@@ -14,7 +14,8 @@ class ArticleController extends Controller
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    private function showArticle() {
+    private function showArticle()
+    {
         $postsTable = new PostsTable($this->db);
         $posts = $postsTable->all();
         return $this->render('Article/post', compact('posts'));
