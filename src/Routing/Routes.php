@@ -31,5 +31,26 @@ return [
         ],
         'controller' => ArticleDetailsController::class
     ],
+
+    'admin' => [
+        'path' => '/admin',
+        'method' => [
+            'GET',
+            'POST'
+        ],
+        'params' => [
+            'id' => '\d+'
+        ],
+        'controller' => AdminController::class
+    ],
+
+    'contact' => [
+        'path' => '/contact',
+        'method' => [
+            'GET',
+            'POST'
+        ],
+        'controller' => ContactController::class
+    ]
 ];
 
