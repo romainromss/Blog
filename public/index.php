@@ -1,8 +1,9 @@
 <?php
 
-
 use Romss\App;
 use Romss\Routing\Router;
+
+session_start();
 
 require __DIR__ .'/../vendor/autoload.php';
 

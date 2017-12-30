@@ -111,6 +111,9 @@ class Comment extends Entity
         return $this->comment;
     }
 
+    /**
+     * @return mixed
+     */
     public function comment_date()
     {
         return $this->comment_date();

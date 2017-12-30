@@ -5,6 +5,7 @@ namespace Romss\Routing;
 use Romss\Controllers\ArticleController;
 use Romss\Controllers\ArticleDetailsController;
 use Romss\Controllers\HomeController;
+use Romss\Controllers\LoginController;
 
 
 return [
@@ -51,6 +52,15 @@ return [
             'POST'
         ],
         'controller' => ContactController::class
+    ],
+
+    'login' =>[
+        'path' => '/login',
+        'method' => [
+            'GET',
+            'POST'
+        ],
+        'controller' => LoginController::class
     ]
 ];
 

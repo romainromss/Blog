@@ -27,8 +27,14 @@ class Controller
     public function redirect($url)
     {
         header('HTTP/1.1 301 Moved Permanently', false, 301);
-        header('Location: '.$url);
+        header('Location: ' . $url);
         exit();
+    }
+
+    public function getInput($input): string
+    {
+        if (isset($_POST[$input])) return $input;
+        return null;
     }
 
     /**
@@ -39,7 +45,7 @@ class Controller
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    protected function render($file, $params)
+    protected function render($file, $params = [])
     {
         return $this->twig->render($file.'.html.twig', $params);
     }

@@ -14,7 +14,7 @@ class ArticleController extends Controller
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    private function showArticle()
+    private function showArticles()
     {
         $postsTable = new PostsTable($this->db);
         $posts = $postsTable->all();
@@ -32,7 +32,7 @@ class ArticleController extends Controller
     public function __invoke(array $params)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'GET'){
-            return $this->showArticle();
+            return $this->showArticles();
         }
         return 'Not Found';
     }
