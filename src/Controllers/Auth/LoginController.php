@@ -2,32 +2,47 @@
 
 namespace  Romss\Controllers\Auth;
 
-use Romss\Controllers\Controller;
-use \Romss\Models\UsersTable;
+use Romss\Models\UsersTable;
 
-class LoginController extends  Controller
+class LoginController extends  VerifyAuthentication
 {
     /**
-     * @param $email
+     * Check login forms
      */
-    private function postLogin($email)
+    private function postLogin()
     {
-        //faire deco session  dans logout
-        if ($_SESSION['email'] === $email) {
+        $email = $_POST['email'] ?? null;
+        $password = $_POST['pass'] ?? null;
+        $remember = $this->getInput('remember');
+
+        $userTable = new UsersTable($this->db);
+        $user = $userTable->getUserByEmail($email);
+
+
+        if ($_SESSION['auth']['email'] === $email) {
+            $this->setFlash('warning', 'Vous êtes déjà connecté !');
             $this->redirect('/');
         }
 
-        $getUser = new UsersTable($this->db);
-        $getUser = $getUser->getUserByEmail($email);
+        if ($user && password_verify($password, $user['password']) && $user['email_token'] === null) {
+            if (!empty($remember)){
+                $token = $this->generateToken($user);
+                setcookie('remember', $token, time() + 3600 * 24 * 7, '/', null, false, true);
+            }
 
-        if ($getUser){
-            $_SESSION['email'] = $getUser['email'];
+            unset($user['password']);
+            $_SESSION['auth'] = $user;
+
+            $this->setFlash('success', 'Vous êtes maintenant connecté !');
             $this->redirect('/');
         }
 
+        $this->setFlash('danger', 'Mauvais mot de passe ou email');
         $this->redirect('/login');
 
     }
+
+
 
     /**
      * @return string
@@ -59,7 +74,7 @@ class LoginController extends  Controller
             // faire une coup de bcrypt du pass et verifier que ce soit la meme valeur dans la bdd
             // mettre email et token (généré?) dans la session (ou cookie, a voir avec quenti pour la secu)
             // si dans la session email et token alors auth
-             return $this->postLogin($_POST['email']);
+             return $this->postLogin();
         }
         return 'Not found';
     }
