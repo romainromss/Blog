@@ -2,12 +2,9 @@
 
 namespace Romss\Models;
 
-
-use PDO;
-
 class UsersTable extends Table
 {
-    function registerUser($name, $password, $email, $emailToken)
+    public function registerUser($name, $password, $email, $emailToken)
     {
         $reqRegisterUser =$this->db->prepare(
             'INSERT INTO users (name, password, email, email_token, register_at, connection_at, rank) 
@@ -23,7 +20,7 @@ class UsersTable extends Table
     }
 
 
-    function getUserByEmail($email)
+    public function getUserByEmail($email)
     {
         $reqUsers = $this->db->prepare(
             'SELECT id, name, password, email, email_token, register_at, connection_at, rank FROM users
@@ -35,7 +32,7 @@ class UsersTable extends Table
         return $reqUsers->fetch();
     }
 
-    function getUserById($userId)
+    public function getUserById($userId)
     {
         $reqUserID = $this->db->prepare(
             'SELECT id, name, password, email, email_token, register_at, connection_at, rank FROM users
@@ -49,9 +46,9 @@ class UsersTable extends Table
         return $reqUserID->fetch();
     }
 
-    function updateUser($user)
+    public function updateUser($user)
     {
-        $reqUpdate =$this->db->prepare(
+        $reqUpdate = $this->db->prepare(
             'UPDATE users
         SET name = :name,
             email = :email,
@@ -73,7 +70,7 @@ class UsersTable extends Table
 
     function count()
     {
-        $reqCount=$this->db->prepare(
+        $reqCount = $this->db->prepare(
             'SELECT COUNT(*) AS NbUsers FROM users');
         return $reqCount;
     }
