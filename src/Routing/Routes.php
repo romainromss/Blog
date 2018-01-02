@@ -4,8 +4,10 @@ namespace Romss\Routing;
 
 use Romss\Controllers\ArticleController;
 use Romss\Controllers\ArticleDetailsController;
+use Romss\Controllers\Auth\LoginController;
+use Romss\Controllers\Auth\LogoutController;
 use Romss\Controllers\HomeController;
-use Romss\Controllers\LoginController;
+
 
 
 return [
@@ -34,7 +36,7 @@ return [
     ],
 
     'admin' => [
-        'path' => '/admin',
+        'path' => '/panel',
         'method' => [
             'GET',
             'POST'
@@ -61,6 +63,22 @@ return [
             'POST'
         ],
         'controller' => LoginController::class
+    ],
+
+    'logout' =>[
+        'path' => '/logout',
+        'method' => [
+            'GET'
+        ],
+        'controller' => LogoutController::class
+    ],
+
+    'register' =>[
+        'path' => '/register',
+        'method' => [
+            'GET'
+        ],
+        'controller' => RegisterController::class
     ]
 ];
 
