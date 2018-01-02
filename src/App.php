@@ -2,6 +2,7 @@
 
 namespace Romss;
 
+use Romss\Models\UsersTable;
 use Twig\Extensions\TextExtension;
 use Twig_Environment;
 use Twig_Extensions_Extension_Text;
@@ -26,6 +27,36 @@ class App
         $this->twig->addExtension(new \Twig_Extension_Debug());
 
         $this->db = new Database('mysql:host=127.0.0.1;dbname=blog', 'root', '23031991');
+    }
+
+    public function checkRemember(){
+        if(isset($_SESSION['auth']) || !isset($_COOKIE['remember'])) {
+            return false;
+        }
+
+        // 1---hash
+        $values = explode('---', $_COOKIE['remember']);
+
+        if(count($values) !== 2){
+            return false;
+        }
+
+        $id = intval($values[0]);
+        $token = $values[1];
+
+        $userTable = new UsersTable($this->db);
+        $user = $userTable->getUserById($id);
+
+        $checkToken = hash('sha512', $user['email'].'#~!*$'.$user['password']);
+
+        if($user && $token === $checkToken){
+            unset($user['password']);
+
+            $_SESSION['auth'] = $user;
+            setcookie('remember', $token, time() + 3600 * 24 * 7, '/', null, false, true);
+        }
+
+        return true;
     }
 
     /**
