@@ -16,8 +16,7 @@ class HomeController extends Controller
     public function __invoke(array $params)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-                var_dump($_SESSION);
-                return $this->render('home/home');
+            return $this->render('home/home');
         }
         return 'Not Found';
       }
