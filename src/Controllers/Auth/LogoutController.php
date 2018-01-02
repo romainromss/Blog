@@ -1,7 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: romss
- * Date: 29.12.17
- * Time: 18:04
- */
+namespace Romss\Controllers\Auth;
+
+class LogoutController extends VerifyAuthentication
+{
+    public function __invoke()
+    {
+        unset($_SESSION['auth']);
+        setcookie('remember', '', -1, '/', null, false, true);
+        $this->setFlash('success', 'Vous êtes bien déconnecté');
+        $this->redirect('/');
+    }
+}
