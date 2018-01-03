@@ -6,6 +6,19 @@ use Romss\Models\UsersTable;
 
 class LoginController extends  VerifyAuthentication
 {
+
+    /**
+     * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    private function getLogin()
+    {
+        return $this->render('Login/login');
+    }
+
+
     /**
      * Check login forms
      */
@@ -18,13 +31,12 @@ class LoginController extends  VerifyAuthentication
         $userTable = new UsersTable($this->db);
         $user = $userTable->getUserByEmail($email);
 
-
         if ($_SESSION['auth']['email'] === $email) {
             $this->setFlash('warning', 'Vous êtes déjà connecté !');
             $this->redirect('/');
         }
 
-        if ($user && password_verify($password, $user['password']) && $user['email_token'] === null) {
+        if ($user && password_verify($email.'#-$'.$password, $user['password']) && $user['email_token'] === null) {
             if (!empty($remember)){
                 $token = $this->generateToken($user);
                 setcookie('remember', $token, time() + 3600 * 24 * 7, '/', null, false, true);
@@ -41,20 +53,6 @@ class LoginController extends  VerifyAuthentication
         $this->redirect('/login');
 
     }
-
-
-
-    /**
-     * @return string
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     */
-    private function getLogin()
-    {
-        return $this->render('Login/login');
-    }
-
 
     /**
      * @param array $params
