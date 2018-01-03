@@ -4,13 +4,12 @@ namespace Romss\Models;
 
 class UsersTable extends Table
 {
-    public function registerUser($name, $password, $email, $emailToken)
+    public function registerUser($password, $email, $emailToken)
     {
-        $reqRegisterUser =$this->db->prepare(
-            'INSERT INTO users (name, password, email, email_token, register_at, connection_at, rank) 
-        VALUES (:name, :password, :email, :emailToken, NOW(), NULL, 1)');
+        $reqRegisterUser =$this->db->prepare('
+            INSERT INTO users (password, email, email_token, register_at, connection_at, rank) 
+            VALUES (:password, :email, :emailToken, NOW(), NULL, 1)');
         $reqRegisterUser->execute([
-            ':name'=> $name,
             ':password'=> $password,
             ':email'=> $email,
             ':emailToken'=> $emailToken
@@ -23,7 +22,7 @@ class UsersTable extends Table
     public function getUserByEmail($email)
     {
         $reqUsers = $this->db->prepare(
-            'SELECT id, name, password, email, email_token, register_at, connection_at, rank FROM users
+            'SELECT id, password, email, email_token, register_at, connection_at, rank FROM users
         WHERE email = :email');
 
         $reqUsers->execute([
@@ -35,7 +34,7 @@ class UsersTable extends Table
     public function getUserById($userId)
     {
         $reqUserID = $this->db->prepare(
-            'SELECT id, name, password, email, email_token, register_at, connection_at, rank FROM users
+            'SELECT id, password, email, email_token, register_at, connection_at, rank FROM users
         WHERE id = :userId
         LIMIT 0, 1');
 
@@ -50,20 +49,18 @@ class UsersTable extends Table
     {
         $reqUpdate = $this->db->prepare(
             'UPDATE users
-        SET name = :name,
-            email = :email,
+        SET email = :email,
             email_token = :email_token,
             connection_at = :connection_at,
             rank = :rank
         WHERE id = :userId');
 
         $reqUpdate->execute([
-            ':name', $user['name'],
-            ':email', $user['email'],
-            ':email_token', $user['email_token'],
-            ':connection_at', $user['connection_at'],
-            ':rank', $user['rank'],
-            ':userId', $user['id']
+            ':email' => $user['email'],
+            ':email_token' => $user['email_token'],
+            ':connection_at' => $user['connection_at'],
+            ':rank' => $user['rank'],
+            ':userId' => $user['id']
         ]);
         return $reqUpdate;
     }
