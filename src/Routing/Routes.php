@@ -6,6 +6,8 @@ use Romss\Controllers\ArticleController;
 use Romss\Controllers\ArticleDetailsController;
 use Romss\Controllers\Auth\LoginController;
 use Romss\Controllers\Auth\LogoutController;
+use Romss\Controllers\Auth\RegisterController;
+use Romss\Controllers\Auth\VerifyMailController;
 use Romss\Controllers\HomeController;
 
 
@@ -76,9 +78,16 @@ return [
     'register' =>[
         'path' => '/register',
         'method' => [
-            'GET'
+            'GET',
+            'POST'
         ],
         'controller' => RegisterController::class
+    ],
+
+    'verifyToken' =>[
+        'path' => '/verify/{id}-{token}',
+        'method' =>'GET',
+        'controller' => VerifyMailController::class
     ]
 ];
 
