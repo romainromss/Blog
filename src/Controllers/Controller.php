@@ -66,12 +66,13 @@ class Controller
     /**
      * @param $file
      * @param array $params
+     * @param string $type
      * @return string
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    protected function render($file, $params = [])
+    protected function render($file, $params = [], $type = 'html')
     {
         if (isset($_SESSION['flash'])) {
             $params['__flash'] = $_SESSION['flash'];
@@ -79,8 +80,8 @@ class Controller
         }
 
         $params['__session'] = $_SESSION;
-        $params['__page'] = $file.'.html.twig';
+        $params['__page'] = $file.".{$type}.twig";
 
-        return $this->twig->render($file.'.html.twig', $params);
+        return $this->twig->render($file.".{$type}.twig", $params);
     }
 }
