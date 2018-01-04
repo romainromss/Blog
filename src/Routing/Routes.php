@@ -2,6 +2,7 @@
 
 namespace Romss\Routing;
 
+use Romss\Controllers\Admin\AdminController;
 use Romss\Controllers\ArticleController;
 use Romss\Controllers\ArticleDetailsController;
 use Romss\Controllers\Auth\LoginController;

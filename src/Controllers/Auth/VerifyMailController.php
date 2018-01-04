@@ -34,5 +34,4 @@ class VerifyMailController extends VerifyAuthentication
         $this->setFlash("success", "Votre compte est actif. Vous pouvez vous connecter");
         $this->redirect('/');
     }
-
 }

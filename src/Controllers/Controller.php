@@ -43,27 +43,6 @@ class Controller
     }
 
     /**
-     * Permet d'enregistrer les erreurs et le formulaire
-     *
-     * @param array $errors
-     * @param array $post
-     */
-    public function setErrors($errors, $post)
-    {
-        // On enregistre notre formulaire
-        $_SESSION['post'] = $post;
-
-        $content = '<span>Des erreurs sont survenues:</span><ul>';
-        foreach ($errors as $error) {
-            $content .= '<li>'.$error.'</li>';
-        }
-        $content .= '</ul>';
-
-        // On enregistre le contenu de l'erreur
-        $this->setFlash('danger', $content);
-    }
-
-    /**
      * @param $file
      * @param array $params
      * @param string $type

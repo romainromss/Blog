@@ -35,4 +35,11 @@ class CommentsTable extends Table
 
         return $this->db->lastInsertId();
     }
+
+    function count()
+    {
+        $reqCount = $this->db->prepare(
+            'SELECT COUNT(*) AS NbComments FROM comments');
+        return $reqCount->fetch();
+    }
 }

@@ -20,4 +20,11 @@ class PostsTable extends Table
         ]);
         return $post;
     }
+
+    function count()
+    {
+        $reqCount = $this->db->prepare(
+            'SELECT COUNT(*) AS NbPosts FROM posts');
+        return $reqCount->fetch();
+    }
 }

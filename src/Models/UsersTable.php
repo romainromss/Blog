@@ -69,6 +69,6 @@ class UsersTable extends Table
     {
         $reqCount = $this->db->prepare(
             'SELECT COUNT(*) AS NbUsers FROM users');
-        return $reqCount;
+        return $reqCount->fetchAll();
     }
 }
